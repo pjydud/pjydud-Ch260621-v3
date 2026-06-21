@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>중국어 공부 어플 HSK6</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e53935">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f6f7fb;color:#172033}#app{max-width:760px;margin:auto;padding:16px 14px 80px}.hero{background:linear-gradient(135deg,#e53935,#ffb74d);color:white;border-radius:24px;padding:22px;box-shadow:0 8px 24px #0002}.hero h1{margin:0 0 8px;font-size:27px}.bar{height:12px;background:#ffffff55;border-radius:99px;overflow:hidden;margin:15px 0}.bar span{display:block;height:100%;background:white;border-radius:99px}.quick{display:flex;gap:8px;flex-wrap:wrap}.quick button,.back,.complete,.card button{border:0;border-radius:14px;padding:12px 14px;background:#172033;color:white;font-weight:800}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.day{border:0;border-radius:18px;padding:16px 6px;background:white;box-shadow:0 4px 16px #0001;font-weight:800}.day small{display:block;color:#697386;margin-top:4px}.day.done{background:#dff6e5}.card{background:white;border-radius:20px;margin:14px 0;padding:16px;box-shadow:0 4px 18px #0001}.goal{background:#fff3cd;padding:12px;border-radius:14px}.example,.reading{font-size:18px;line-height:1.7;background:#f7f7f7;border-radius:14px;padding:12px}.words{display:grid;grid-template-columns:1fr;gap:10px}.word{background:#f1f4ff!important;color:#172033!important;text-align:left!important}.word b{font-size:21px}.word small{display:block;color:#697386;margin-top:4px}.word .ex{display:block;margin-top:8px;padding-top:8px;border-top:1px solid #dfe5ff;font-weight:500;color:#333;line-height:1.55}.q{border-top:1px solid #eee;padding:14px 0}.q label{display:block;background:#f6f7fb;border-radius:12px;padding:10px;margin-top:8px}.answer{margin-top:8px;padding:10px;border-radius:12px;background:#fff3cd}.back{background:#555}.complete{width:100%;font-size:17px;background:#1b8f4d}.hint{color:#697386;font-size:14px}.quiz-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.searchbox{width:100%;padding:13px;border-radius:12px;border:1px solid #ddd;font-size:16px}
+</style>
+</head>
+<body><main id="app"></main>
+<script src="data.js"></script>
+<script>
+const GRAMMARS=[
+['인칭·기본문','我/你/他/她/我们','주어와 기본 어순을 복습합니다.','我认为学习中文很重要。','나는 중국어 공부가 중요하다고 생각합니다.'],
+['是/有/在','A 是 B / A 有 B / 在 + 장소','정의, 소유, 위치를 표현합니다.','图书馆里有很多中文书。','도서관에는 중국어 책이 많습니다.'],
+['了/过/着','완료·경험·상태 지속','중국어의 상 표현을 복습합니다.','我已经看完了这篇文章。','나는 이미 이 글을 다 읽었습니다.'],
+['把자문','주어 + 把 + 목적어 + 처리 결과','목적어 처리 결과를 강조합니다.','请把这些资料整理好。','이 자료들을 정리해 주세요.'],
+['被자문','목적어 + 被 + 행위자 + 동사','피동 표현을 익힙니다.','这个问题被大家讨论了很久。','이 문제는 모두에게 오래 토론되었습니다.'],
+['비교문','A 比 B + 형용사','비교 표현을 복습합니다.','这个方法比以前的更有效。','이 방법은 이전 것보다 더 효과적입니다.'],
+['결과보어','동사 + 결과','동작의 결과를 표현합니다.','我终于听懂了这段话。','나는 마침내 이 말을 알아들었습니다.'],
+['방향보어','동사 + 来/去/上/下/进/出','동작의 방향을 표현합니다.','他把书拿出来了。','그는 책을 꺼냈습니다.'],
+['복문','因为/虽然/如果/不仅...而且','원인, 조건, 양보, 병렬 관계를 읽습니다.','虽然内容复杂，但是很有价值。','내용은 복잡하지만 가치가 있습니다.'],
+['독해 구조','주제문 + 설명 + 예시 + 결론','긴 문장을 구조로 읽습니다.','阅读时要先抓住文章的主要内容。','읽을 때는 먼저 글의 주요 내용을 잡아야 합니다.']
+];
+const READINGS=[
+['学习一门语言，不只是记住很多单词，更重要的是理解句子之间的关系。只有不断复习，才能把知识变成自己的能力。','언어를 배운다는 것은 많은 단어를 기억하는 것만이 아니라 문장 사이의 관계를 이해하는 것입니다. 계속 복습해야 지식이 자신의 능력이 됩니다.'],
+['随着社会的发展，人与人之间的交流方式发生了很大的变化。网络让信息传播得更快，也让学习变得更加方便。','사회가 발전함에 따라 사람들 사이의 교류 방식은 크게 변했습니다. 인터넷은 정보 전달을 더 빠르게 하고 학습을 더 편리하게 만들었습니다.'],
+['阅读中文文章时，遇到不认识的词并不可怕。关键是根据上下文猜意思，然后再查词典确认。','중국어 글을 읽을 때 모르는 단어를 만나는 것은 두렵지 않습니다. 핵심은 문맥으로 뜻을 추측한 뒤 사전으로 확인하는 것입니다.'],
+['如果想达到高级水平，就要逐渐接触新闻、评论、小说和专业文章。这样才能真正提高理解复杂内容的能力。','고급 수준에 도달하고 싶다면 뉴스, 평론, 소설, 전문 글을 점차 접해야 합니다. 그래야 복잡한 내용을 이해하는 능력을 높일 수 있습니다.']
+];
+const WORDS_PER_DAY=50;
+const DAYS=Array.from({length:90},(_,i)=>{let n=i+1,g=GRAMMARS[i%GRAMMARS.length],r=READINGS[i%READINGS.length],start=(i*WORDS_PER_DAY)%WORDS.length,level=i<30?'HSK1~3':i<60?'HSK4~5':'HSK6 준비';let dayWords=Array.from({length:WORDS_PER_DAY},(_,k)=>WORDS[(start+k)%WORDS.length]);return{day:n,level,goal:`Day ${n}: ${g[0]} + 단어 ${WORDS_PER_DAY}개 + 독해`,grammar:{title:g[0],pattern:g[1],explain:g[2],example:g[3],meaning:g[4]},words:dayWords,reading:{zh:r[0],ko:r[1]}}});
+let state=JSON.parse(localStorage.getItem('cn90_hsk6_state')||'{"done":{},"pinyin":true,"lastDay":1}');
+function el(){return document.getElementById('app')}
+function save(){localStorage.setItem('cn90_hsk6_state',JSON.stringify(state));renderHome()}
+function pct(){return Math.round(Object.keys(state.done).length/90*100)}
+function renderHome(){el().innerHTML=`<section class="hero"><h1>중국어 공부 어플 HSK6</h1><p>90일 · HSK6 준비형 4000단어 · 누적 랜덤 퀴즈</p><div class="bar"><span style="width:${pct()}%"></span></div><b>${pct()}% 완료</b><div class="quick"><button onclick="showReview()">오늘의 복습</button><button onclick="showQuiz()">단어 퀴즈</button><button onclick="showWords()">단어 검색</button><button onclick="togglePinyin()">병음 ${state.pinyin?'ON':'OFF'}</button></div></section><section class="card"><b>총 단어:</b> ${WORDS.length}개 · <b>하루:</b> ${WORDS_PER_DAY}개</section><section class="grid">${DAYS.map(d=>`<button class="day ${state.done[d.day]?'done':''}" onclick="openDay(${d.day})">Day ${d.day}<small>${d.level}</small></button>`).join('')}</section>`}
+function openDay(n){state.lastDay=n;localStorage.setItem('cn90_hsk6_state',JSON.stringify(state));let d=DAYS[n-1];el().innerHTML=`<button class="back" onclick="renderHome()">← 홈</button><h2>Day ${d.day}</h2><p class="goal">${d.goal}</p><section class="card"><h3>오늘의 문법: ${d.grammar.title}</h3><b>${d.grammar.pattern}</b><p>${d.grammar.explain}</p><div class="example">${d.grammar.example}<br><small>${d.grammar.meaning}</small></div></section><section class="card"><h3>오늘의 학습 단어 ${WORDS_PER_DAY}개</h3><p class="hint">단어마다 예문, 병음, 해석 포함</p><div class="words">${d.words.map(w=>`<button class="word"><b>${w.zh}</b><small>${state.pinyin?w.py:''} · ${w.ko}</small><span class="ex">${w.ex}<br><small>${w.expy||w.py}</small><br><small>${w.exko}</small></span></button>`).join('')}</div></section><section class="card"><h3>독해</h3><p class="reading">${d.reading.zh}</p><details><summary>해석 보기</summary><p>${d.reading.ko}</p></details></section><button class="complete" onclick="state.done[${d.day}]=true;save();openDay(${d.day})">학습 완료 체크</button>`}
+function learnedWords(){let max=Math.max(1,...Object.keys(state.done).map(Number),state.lastDay||1);return DAYS.slice(0,max).flatMap(d=>d.words).filter((w,i,a)=>a.findIndex(x=>x.zh===w.zh)===i)}
+function pick(arr,n){return [...arr].sort(()=>Math.random()-.5).slice(0,Math.min(n,arr.length))}
+function showQuiz(){let pool=learnedWords();let qs=pick(pool,30).map(w=>{let wrong=pick(WORDS.filter(x=>x.zh!==w.zh),3).map(x=>x.ko);let opts=pick([w.ko,...wrong],4);return{w,opts,a:opts.indexOf(w.ko)}});el().innerHTML=`<button class="back" onclick="renderHome()">← 홈</button><h2>단어 랜덤 퀴즈</h2><p class="goal">현재 학습한 날까지의 누적 단어에서 ${qs.length}문제를 랜덤 출제합니다.</p><div id="quiz">${qs.map((q,idx)=>`<div class="q"><b>${idx+1}. ${q.w.zh}</b>${state.pinyin?`<small> ${q.w.py}</small>`:''}${q.opts.map((o,i)=>`<label><input type="radio" name="q${idx}" value="${i}"> ${o}</label>`).join('')}<div id="a${idx}"></div></div>`).join('')}</div><div class="quiz-actions"><button onclick="gradeRandomQuiz()">채점하기</button><button onclick="showQuiz()">새 문제 30개</button></div>`;window.currentQuiz=qs}
+function gradeRandomQuiz(){let score=0;currentQuiz.forEach((q,i)=>{let v=document.querySelector(`input[name=q${i}]:checked`);let ok=v&&Number(v.value)===q.a;if(ok)score++;document.getElementById('a'+i).innerHTML=`<div class="answer">${ok?'정답':'오답'} · 정답: ${q.w.ko}<br>${q.w.ex}<br><small>${q.w.expy||q.w.py}</small><br><small>${q.w.exko}</small></div>`});alert(`점수: ${score}/${currentQuiz.length}`)}
+function showWords(){el().innerHTML=`<button class="back" onclick="renderHome()">← 홈</button><h2>단어 검색</h2><input class="searchbox" id="kw" placeholder="중국어/병음/뜻 검색" oninput="renderSearch()"><div id="result"></div>`;renderSearch()}
+function renderSearch(){let q=(document.getElementById('kw')?.value||'').trim().toLowerCase();let arr=q?WORDS.filter(w=>(w.zh+w.py+w.ko).toLowerCase().includes(q)).slice(0,80):WORDS.slice(0,50);document.getElementById('result').innerHTML=`<section class="card"><p class="hint">${arr.length}개 표시</p><div class="words">${arr.map(w=>`<button class="word"><b>${w.zh}</b><small>${state.pinyin?w.py:''} · ${w.ko}</small><span class="ex">${w.ex}<br><small>${w.expy||w.py}</small><br><small>${w.exko}</small></span></button>`).join('')}</div></section>`}
+function showReview(){let next=DAYS.find(d=>!state.done[d.day])||DAYS[89];openDay(next.day)}
+function togglePinyin(){state.pinyin=!state.pinyin;save()}
+renderHome();
+</script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');</script>
+</body></html>
